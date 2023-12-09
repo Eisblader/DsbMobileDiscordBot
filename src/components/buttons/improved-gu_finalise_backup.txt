@@ -1,0 +1,95 @@
+const {
+  ButtonInteraction,
+  Client,
+  ActionRowBuilder,
+  StringSelectMenuBuilder,
+  ButtonBuilder,
+  EmbedBuilder,
+  Colors,
+} = require("discord.js");
+
+module.exports = {
+  data: {
+    name: "improved-gu_finalise",
+  },
+  /**
+   *
+   * @param {ButtonInteraction} interaction
+   * @param {Client} client
+   */
+  async execute(interaction, client) {
+    const { roleArray1, roleArray2, comparisonType } = client;
+
+    let members_r1 = new Array();
+    let members_r2 = new Array();
+
+    const roles1 = new Array();
+    const roles2 = new Array();
+
+    await roleArray1.forEach(async (roleId) => {
+      const role_a = await interaction.guild.roles.fetch(roleId);
+      roles1.push(role_a);
+      role_a.members.forEach((member) => {
+        members_r1.push(member.user);
+      });
+    });
+    members_r1 = await Array.from(new Set(members_r1));
+
+    await roleArray2.forEach(async (roleId) => {
+      const role_a = await interaction.guild.roles.fetch(roleId);
+      roles2.push(role_a);
+      role_a.members.forEach((member) => {
+        members_r2.push(member.user);
+      });
+    });
+    members_r2 = await Array.from(new Set(members_r2));
+
+    let embedDescription = new String();
+    let members = new Array();
+    let embedTitle = new String();
+    const role1 = await interaction.guild.roles.fetch(roleArray1[0]);
+    const role2 = await interaction.guild.roles.fetch(roleArray2[0]);
+    switch (comparisonType) {
+      case "intersection": {
+        members = members_r1.filter((x) => members_r2.includes(x));
+        embedTitle = `${members.length} Members found! `;
+        break;
+      }
+
+      case "difference": {
+        members = members_r1.filter((x) => !members_r2.includes(x));
+        embedTitle = `${members.length} Members found! `;
+        break;
+      }
+
+      case "symmetrical_difference": {
+        members = members_r1
+          .filter((x) => !members_r2.includes(x))
+          .concat(members_r2.filter((x) => !members_r1.includes(x)));
+        embedTitle = `${members.length} Members found! `;
+        break;
+      }
+
+      case "union": {
+        members = [...new Set([...members_r1, ...members_r2])];
+        embedTitle = `${members.length} Members found! `;
+        break;
+      }
+    }
+    for (let index = 0; index < members.length; index++) {
+      embedDescription = embedDescription.concat(`\`${members[index].tag}\` - ${members[index]}\n`);
+    }
+    if (members.length === 0) {
+      embedDescription = "`No Members!`";
+    } else if (members.length === 1) {
+      embedTitle = embedTitle.replace("Members", "Member");
+    }
+    // Embed Creation
+    const embed = new EmbedBuilder()
+      .setTitle(embedTitle)
+      .setDescription(embedDescription)
+      .setColor(Colors.Green);
+
+    await interaction.channel.send({ embeds: [embed] });
+  },
+};

@@ -1,0 +1,167 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@9.4.1
+2 info using node@v18.14.0
+3 timing npm:load:whichnode Completed in 11ms
+4 timing config:load:defaults Completed in 4ms
+5 timing config:load:file:/usr/local/lib/node_modules/npm/npmrc Completed in 3ms
+6 timing config:load:builtin Completed in 4ms
+7 warn config production Use `--omit=dev` instead.
+8 timing config:load:cli Completed in 69ms
+9 timing config:load:env Completed in 1ms
+10 timing config:load:project Completed in 2ms
+11 timing config:load:file:/home/container/.npmrc Completed in 0ms
+12 timing config:load:user Completed in 0ms
+13 timing config:load:file:/usr/local/etc/npmrc Completed in 0ms
+14 timing config:load:global Completed in 0ms
+15 timing config:load:setEnvs Completed in 1ms
+16 timing config:load Completed in 96ms
+17 timing npm:load:configload Completed in 97ms
+18 timing npm:load:mkdirpcache Completed in 1ms
+19 timing npm:load:mkdirplogs Completed in 1ms
+20 verbose title npm install
+21 verbose argv "install" "--production"
+22 timing npm:load:setTitle Completed in 2ms
+23 timing config:load:flatten Completed in 3ms
+24 timing npm:load:display Completed in 6ms
+25 verbose logfile logs-max:10 dir:/home/container/.npm/_logs/2023-02-08T11_33_16_743Z-
+26 verbose logfile /home/container/.npm/_logs/2023-02-08T11_33_16_743Z-debug-0.log
+27 timing npm:load:logFile Completed in 75ms
+28 timing npm:load:timers Completed in 0ms
+29 timing npm:load:configScope Completed in 0ms
+30 timing npm:load Completed in 193ms
+31 timing arborist:ctor Completed in 1ms
+32 silly logfile start cleaning logs, removing 1 files
+33 silly logfile done cleaning log files
+34 timing idealTree:init Completed in 892ms
+35 timing idealTree:userRequests Completed in 0ms
+36 silly idealTree buildDeps
+37 timing idealTree:#root Completed in 0ms
+38 timing idealTree:buildDeps Completed in 2ms
+39 timing idealTree:fixDepFlags Completed in 0ms
+40 timing idealTree Completed in 900ms
+41 timing arborist:ctor Completed in 1ms
+42 timing reify:loadTrees Completed in 1995ms
+43 timing reify:diffTrees Completed in 6ms
+44 silly reify moves {}
+45 timing reify:retireShallow Completed in 2ms
+46 timing reify:createSparse Completed in 0ms
+47 timing reify:trashOmits Completed in 1ms
+48 timing reify:loadBundles Completed in 0ms
+49 silly audit bulk request {
+49 silly audit   '@discordjs/builders': [ '1.4.0' ],
+49 silly audit   '@discordjs/collection': [ '1.3.0' ],
+49 silly audit   '@discordjs/rest': [ '1.5.0' ],
+49 silly audit   '@discordjs/util': [ '0.1.0' ],
+49 silly audit   '@sapphire/async-queue': [ '1.5.0' ],
+49 silly audit   '@sapphire/shapeshift': [ '3.8.1' ],
+49 silly audit   '@sapphire/snowflake': [ '3.4.0' ],
+49 silly audit   '@tokenizer/token': [ '0.3.0' ],
+49 silly audit   '@types/node': [ '18.11.18' ],
+49 silly audit   '@types/ws': [ '8.5.3' ],
+49 silly audit   'ansi-styles': [ '4.3.0' ],
+49 silly audit   busboy: [ '1.6.0' ],
+49 silly audit   'capture-stack-trace': [ '1.0.2' ],
+49 silly audit   chalk: [ '4.1.2' ],
+49 silly audit   'color-convert': [ '2.0.1' ],
+49 silly audit   'color-name': [ '1.1.4' ],
+49 silly audit   'core-util-is': [ '1.0.3' ],
+49 silly audit   'create-error-class': [ '3.0.2' ],
+49 silly audit   'data-uri-to-buffer': [ '4.0.0' ],
+49 silly audit   'discord-api-types': [ '0.37.25' ],
+49 silly audit   'discord.js': [ '14.7.1' ],
+49 silly audit   dotenv: [ '16.0.3' ],
+49 silly audit   duplexer2: [ '0.1.4' ],
+49 silly audit   'readable-stream': [ '2.3.7', '3.6.0' ],
+49 silly audit   'safe-buffer': [ '5.1.2', '5.2.1' ],
+49 silly audit   string_decoder: [ '1.1.1', '1.3.0' ],
+49 silly audit   'end-of-stream': [ '1.4.4' ],
+49 silly audit   'error-ex': [ '1.3.2' ],
+49 silly audit   'fast-deep-equal': [ '3.1.3' ],
+49 silly audit   'fetch-blob': [ '3.2.0' ],
+49 silly audit   'file-type': [ '18.0.0' ],
+49 silly audit   'formdata-polyfill': [ '4.0.10' ],
+49 silly audit   'get-stream': [ '5.2.0' ],
+49 silly audit   got: [ '5.6.0' ],
+49 silly audit   'has-flag': [ '4.0.0' ],
+49 silly audit   hastebin: [ '0.2.1' ],
+49 silly audit   ieee754: [ '1.2.1' ],
+49 silly audit   inherits: [ '2.0.4' ],
+49 silly audit   'is-arrayish': [ '0.2.1' ],
+49 silly audit   'is-plain-obj': [ '1.1.0' ],
+49 silly audit   'is-redirect': [ '1.0.0' ],
+49 silly audit   'is-retry-allowed': [ '1.2.0' ],
+49 silly audit   'is-stream': [ '1.1.0' ],
+49 silly audit   isarray: [ '1.0.0' ],
+49 silly audit   lodash: [ '4.17.21' ],
+49 silly audit   'lodash.snakecase': [ '4.1.1' ],
+49 silly audit   'lowercase-keys': [ '1.0.1' ],
+49 silly audit   'node-domexception': [ '1.0.0' ],
+49 silly audit   'node-fetch': [ '3.3.0' ],
+49 silly audit   'node-status-codes': [ '1.0.0' ],
+49 silly audit   'object-assign': [ '4.1.1' ],
+49 silly audit   once: [ '1.4.0' ],
+49 silly audit   'parse-json': [ '2.2.0' ],
+49 silly audit   'peek-readable': [ '5.0.0' ],
+49 silly audit   pinkie: [ '2.0.4' ],
+49 silly audit   'pinkie-promise': [ '2.0.1' ],
+49 silly audit   'prepend-http': [ '1.0.4' ],
+49 silly audit   'process-nextick-args': [ '2.0.1' ],
+49 silly audit   pump: [ '3.0.0' ],
+49 silly audit   'read-all-stream': [ '3.1.0' ],
+49 silly audit   'readable-web-to-node-stream': [ '3.0.2' ],
+49 silly audit   streamsearch: [ '1.1.0' ],
+49 silly audit   strtok3: [ '7.0.0' ],
+49 silly audit   'supports-color': [ '7.2.0' ],
+49 silly audit   'timed-out': [ '2.0.0' ],
+49 silly audit   'token-types': [ '5.0.1' ],
+49 silly audit   'ts-mixer': [ '6.0.2' ],
+49 silly audit   tslib: [ '2.4.1' ],
+49 silly audit   undici: [ '5.14.0' ],
+49 silly audit   'unzip-response': [ '1.0.2' ],
+49 silly audit   'url-parse-lax': [ '1.0.0' ],
+49 silly audit   'util-deprecate': [ '1.0.2' ],
+49 silly audit   'web-streams-polyfill': [ '3.2.1' ],
+49 silly audit   wrappy: [ '1.0.2' ],
+49 silly audit   ws: [ '8.11.0' ],
+49 silly audit   yargs: [ '1.3.2' ]
+49 silly audit }
+50 timing reify:unpack Completed in 95ms
+51 timing reify:unretire Completed in 0ms
+52 timing build:queue Completed in 0ms
+53 timing build:deps Completed in 1ms
+54 timing build Completed in 1ms
+55 timing reify:build Completed in 1ms
+56 timing reify:trash Completed in 0ms
+57 timing reify:save Completed in 127ms
+58 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 928ms
+59 timing auditReport:getReport Completed in 1014ms
+60 silly audit report {
+60 silly audit report   got: [
+60 silly audit report     {
+60 silly audit report       id: 1088948,
+60 silly audit report       url: 'https://github.com/advisories/GHSA-pfrx-2q88-qq97',
+60 silly audit report       title: 'Got allows a redirect to a UNIX socket',
+60 silly audit report       severity: 'moderate',
+60 silly audit report       vulnerable_versions: '<11.8.5',
+60 silly audit report       cwe: [],
+60 silly audit report       cvss: [Object]
+60 silly audit report     }
+60 silly audit report   ]
+60 silly audit report }
+61 timing metavuln:cache:get:security-advisory:got:6RwqOtyKHRfIYfVtDkU86+jmAkm03OLYFGvOQUWcpuzfU8h8RNz3w5ZFTGeJ+8QNC0jGK3xFL9UvdqMN+kLCrg== Completed in 93ms
+62 http fetch GET 200 https://registry.npmjs.org/got 576ms (cache revalidated)
+63 timing metavuln:packument:got Completed in 673ms
+64 timing metavuln:load:security-advisory:got:1088948 Completed in 6ms
+65 timing metavuln:calculate:security-advisory:got:1088948 Completed in 682ms
+66 timing metavuln:cache:get:security-advisory:hastebin:sK6k9e11YL7LTM62jkg9Uw89RUVquMO2zZ8KQ9QV75NFr5OVExawqY3j4WGE4MLi9+Jy8BJTPVyQRq/z3oshsQ== Completed in 106ms
+67 http fetch GET 200 https://registry.npmjs.org/hastebin 825ms (cache revalidated)
+68 timing metavuln:packument:hastebin Completed in 826ms
+69 timing metavuln:load:security-advisory:hastebin:6RwqOtyKHRfIYfVtDkU86+jmAkm03OLYFGvOQUWcpuzfU8h8RNz3w5ZFTGeJ+8QNC0jGK3xFL9UvdqMN+kLCrg== Completed in 0ms
+70 timing metavuln:calculate:security-advisory:hastebin:6RwqOtyKHRfIYfVtDkU86+jmAkm03OLYFGvOQUWcpuzfU8h8RNz3w5ZFTGeJ+8QNC0jGK3xFL9UvdqMN+kLCrg== Completed in 827ms
+71 timing auditReport:init Completed in 1581ms
+72 timing reify:audit Completed in 2596ms
+73 timing reify Completed in 4610ms
+74 timing command:install Completed in 4816ms
+75 verbose exit 0
+76 timing npm Completed in 5032ms
+77 info ok
