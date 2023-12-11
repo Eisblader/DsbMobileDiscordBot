@@ -13,6 +13,7 @@ module.exports = {
     .setName("dsb")
     .setDescription("Vertretungsplan")
     .setDMPermission(false),
+
   // .addSubcommand((subcommand) =>
   //   subcommand
   //     .setName("all")
