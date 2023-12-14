@@ -1,29 +1,27 @@
 const puppeteer = require("puppeteer");
-// const chalk = require("chalk");
-// const moment = require("moment");
 require("dotenv/config");
 const {
   SlashCommandBuilder,
   ChatInputCommandInteraction,
   Client,
 } = require("discord.js");
+const fs = require("fs");
 
 module.exports = {
   data: new SlashCommandBuilder()
+    .setDMPermission(false)
     .setName("dsb")
     .setDescription("Vertretungsplan")
-    .setDMPermission(false),
-
-  // .addSubcommand((subcommand) =>
-  //   subcommand
-  //     .setName("all")
-  //     .setDescription("Allgemeiner Vertretungsplan für alle")
-  // )
-  // .addSubcommand((subcommand) =>
-  //   subcommand
-  //     .setName("user")
-  //     .setDescription("Vertretungsplan für die ausführende Person")
-  // ),
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("all")
+        .setDescription("Allgemeiner Vertretungsplan für alle")
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("user")
+        .setDescription("Vertretungsplan für die ausführende Person")
+    ),
   /**
    *
    * @param {ChatInputCommandInteraction} interaction
@@ -113,9 +111,35 @@ module.exports = {
 
     /** @param {Day[]} days */
     const filterForTeachers = (days) => {
-      const usersMap = require("../../storage/users");
-      console.log(usersMap.get(interaction.member.user.id.toString()));
-      const FaecherMap = usersMap.get(interaction.member.user.id);
+      // Get user from storage and create his map
+      delete require.cache[require.resolve("../../storage/users.json")];
+      const usersArrayJSON = require("../../storage/users.json");
+      const userKurseArray = Array.from(
+        Object.entries(
+          JSON.parse(usersMapJSON[interaction.member.user.id.toString()])
+        )
+      );
+
+      const kursMap = new Map([
+        ["d2", ["hart", ["D"]]],
+        ["e2", ["hint", ["E"]]],
+        ["g2", ["mich", ["G"]]],
+        ["inf1", ["from", ["Inf", "Informatik"]]],
+        ["m2", ["hage", ["M"]]],
+        ["mu1", ["link", ["Mu"]]],
+        ["psemEnglisch", ["mule", ["tbd"]]],
+        ["ph1", ["dörf", ["Physik", "Ph"]]],
+        ["ev1", ["dech", ["Ev"]]],
+        ["sk2", ["walt", ["Sk"]]],
+        ["sp2", ["shwe", ["Sport"]]],
+        ["wr1", ["kien", ["WR"]]],
+      ]);
+
+      const FaecherMap = new Map();
+      userKurseArray.forEach((value) => {
+        FaecherMap.set(kursMap.get(value)[0], kursMap.get(value)[1]);
+      });
+      // Scan for user's subjects / teachers
       days.forEach(
         (day) =>
           (day.dayEntries = day.dayEntries.filter((e) => {
@@ -167,18 +191,10 @@ module.exports = {
       // Launch the browser and open a new blank page
       const browser = await puppeteer.launch({ headless: "new" });
       const page = await browser.newPage();
-
-      // Navigate the page to a URL
       await page.goto("https://www.dsbmobile.de/");
-
-      // Set screen size
       await page.setViewport({ width: 1080, height: 1024 });
-
-      // do login stuff
       if (page.url().endsWith("Login.aspx")) doLoginStuff(page);
-
       const planLinks = [];
-
       for (let i = 0; i <= 1; i++) {
         const planSelector = `.timetableView .timetable-element[data-index="${i}"]`;
         await page.waitForSelector(planSelector);

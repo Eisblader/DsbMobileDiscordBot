@@ -3,6 +3,7 @@ const {
   EmbedBuilder,
   PermissionFlagsBits,
 } = require("discord.js");
+
 const hastebin = require("hastebin");
 
 module.exports = {

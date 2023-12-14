@@ -1,8 +1,13 @@
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
+const { Client } = require("discord.js");
 
 const fs = require("fs");
 
+/**
+ *
+ * @param {Client} client
+ */
 module.exports = (client) => {
   client.handleCommands = async () => {
     const commandFolders = fs.readdirSync("./src/commands");
@@ -33,7 +38,7 @@ module.exports = (client) => {
       console.log("Started refreshing application (/) commands.");
 
       await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
-        // rest.put(Routes.applicationCommands(clientId), {
+        // await rest.put(Routes.applicationCommands(clientId), {
         body: client.commandArray,
       });
       // console.log(client.commandArray);

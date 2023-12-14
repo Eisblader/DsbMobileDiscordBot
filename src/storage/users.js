@@ -9,7 +9,7 @@ const usersMap = new Map([
       ["hage", ["M"]],
       ["link", ["Mu"]],
       ["mule", ["tbd"]],
-      ["dörf", ["Physik"]],
+      ["dörf", ["Physik", "Ph"]],
       ["dech", ["Ev"]],
       ["walt", ["Sk"]],
       ["shwe", ["Sport"]],
