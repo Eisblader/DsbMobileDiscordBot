@@ -113,12 +113,9 @@ module.exports = {
     const filterForTeachers = (days) => {
       // Get user from storage and create his map
       delete require.cache[require.resolve("../../storage/users.json")];
-      const usersArrayJSON = require("../../storage/users.json");
-      const userKurseArray = Array.from(
-        Object.entries(
-          JSON.parse(usersMapJSON[interaction.member.user.id.toString()])
-        )
-      );
+      const userKurseArray = require("../../storage/users.json")[
+        interaction.member.user.id
+      ];
 
       const kursMap = new Map([
         ["d2", ["hart", ["D"]]],

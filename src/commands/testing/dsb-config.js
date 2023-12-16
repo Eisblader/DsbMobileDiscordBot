@@ -52,18 +52,29 @@ module.exports = {
   async execute(interaction, client) {
     await interaction.deferReply({ ephemeral: true });
     const subcommand = interaction.options.getSubcommand();
+    // console.log(subcommand);
 
     delete require.cache[require.resolve("../../storage/users.json")];
     let usersObject = require("../../storage/users.json");
-    if ((subcommand == "add") | "remove") {
+    if (subcommand == "add" || subcommand == "remove") {
       const kursArray = interaction.options.getString("kursliste").split(", ");
       let kursString = "";
 
       // add Kursliste to user's ID
       if (subcommand == "add") {
         // if Kurs isn't already included: add Kurs to list
+        const regex = new RegExp(
+          "d[1-3]|e[1-3]|g[1-3]|inf1|m[1-3]|mu1|psemEnglisch|ph1|ev1|sk[1-3]|sp[1-3]|wr[1-2]"
+        );
         kursArray.forEach((e) => {
-          if (usersObject[interaction.member.user.id].indexOf(e) === -1) {
+          if (usersObject[interaction.member.user.id] == undefined) {
+            usersObject[interaction.member.user.id] = [];
+          }
+          if (
+            usersObject[interaction.member.user.id].indexOf(e) === -1 &&
+            e.length <= 3 &&
+            regex.test(e)
+          ) {
             usersObject[interaction.member.user.id].push(e);
             kursString = kursString.concat(`- ${e}\n`);
           }
@@ -83,14 +94,36 @@ module.exports = {
         });
       } else if (subcommand == "remove") {
         kursArray.forEach((e) => {
-          kursString = kursString.concat(`- ${e}\n`);
+          if (usersObject[interaction.member.user.id].indexOf(e) !== -1) {
+            usersObject[interaction.member.user.id].splice(
+              usersObject[interaction.member.user.id].indexOf(e),
+              1
+            );
+            kursString = kursString.concat(`- ${e}\n`);
+          }
         });
+
+        // remove Kurse from users.json
+        fs.writeFileSync(
+          "./src/storage/users.json",
+          JSON.stringify(usersObject),
+          (err) => {
+            if (err) throw err;
+          }
+        );
+
         await interaction.editReply({
-          content: `${interaction.member.displayName} you stink!!`,
+          content: `Folgende Kurse entfernt:\n\n${kursString}`,
         });
       }
     } else if (subcommand == "show") {
       let kursString = "";
+      if (usersObject[interaction.member.user.id] == undefined) {
+        await interaction.editReply({
+          content: `Du hast keine Kurse gespeichert`,
+        });
+        return;
+      }
       usersObject[interaction.member.user.id].forEach((e) => {
         kursString = kursString.concat(`- ${e}\n`);
       });
